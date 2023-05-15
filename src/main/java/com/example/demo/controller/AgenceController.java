@@ -38,10 +38,10 @@ public class AgenceController {
         return cltS.ListAgence();
     }
 
-    /*@GetMapping("/GETAgenceBYID/{id}")
+    @GetMapping("/GETAgenceBYID/{id}")
     public Agence GetAgenceById(@PathVariable Long id){
         return cltS.getAgenceById(id);
-    }*/
+    }
 @Autowired
     AgenceRepository agenceRepository;
 //Ajout d'un montant a la caisse

@@ -23,7 +23,7 @@ public class Token {
 
     private boolean  expired;
     private boolean revoked;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 }

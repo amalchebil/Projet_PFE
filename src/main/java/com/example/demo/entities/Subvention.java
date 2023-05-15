@@ -25,6 +25,7 @@ public class Subvention {
 
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client;
 }

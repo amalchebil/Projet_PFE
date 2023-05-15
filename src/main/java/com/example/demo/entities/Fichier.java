@@ -26,7 +26,8 @@ public class Fichier {
     private byte[] data;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client2;
 
     public Fichier() {

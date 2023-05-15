@@ -44,7 +44,6 @@ public class Client {
     private String cin_c;
     @Column(name = "email_C",unique = true,nullable = false)
     @Email(message = "Le champ email doit être une adresse email valide.")
-
     private String email_c;
 
     @Column(name = "montant_emprunte")
@@ -76,14 +75,15 @@ public class Client {
     @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER)
     private Set<Fichier> fichiers;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "agence_id")
     private Agence agc;
 
    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
    private List<Demande_Projet> demandeProjets;
 
-   @ManyToOne
-    private Projet projet;
+   @ManyToOne(fetch = FetchType.EAGER)
+   private Projet projet;
 
    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
    private List<Demande_Subvention> demandeSubventions;

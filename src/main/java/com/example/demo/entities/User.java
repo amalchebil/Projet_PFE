@@ -22,6 +22,7 @@ import java.util.List;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
     private Integer id;
     @Column(name = "nom_u")
     private String firstname;
@@ -39,9 +40,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "agence_id")
     private Agence agence;
-    @OneToMany(mappedBy = "user")
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Token> tokens;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

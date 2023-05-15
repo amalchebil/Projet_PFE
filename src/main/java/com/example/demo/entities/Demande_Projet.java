@@ -48,7 +48,7 @@ public class Demande_Projet {
     @OneToOne
     private Projet projet;
 
-    @ManyToOne
-    @JoinColumn(name="id_client", referencedColumnName="id_client")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client;
 }

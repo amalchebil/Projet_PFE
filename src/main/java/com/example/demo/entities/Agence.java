@@ -10,6 +10,7 @@ import java.util.List;
 public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "agence_id")
     private Long id;
     @Column(name = "nom_agence")
     private String nom_agence;
@@ -17,18 +18,18 @@ public class Agence {
     private String gouvernorat;
     @Column(name="caisse")
     private Double caisse;
-    @OneToMany(mappedBy = "agc")
+    @OneToMany(mappedBy = "agc",fetch = FetchType.EAGER)
     private List<Client>clients;
 
-@OneToMany(mappedBy = "agence2")
+@OneToMany(mappedBy = "agence2",fetch = FetchType.EAGER)
 private List<EventCaisse>  eventCaisses;
-    @OneToMany(mappedBy = "agence1")
+    @OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER)
     private List<EventClient>  eventClients;
-    @OneToMany(mappedBy = "agc1")
+    @OneToMany(mappedBy = "agc1",fetch = FetchType.EAGER)
     private List<Projet>projets;
 
 
-    @OneToMany(mappedBy = "agence")
+    @OneToMany(mappedBy = "agence",fetch = FetchType.EAGER)
     private List<User> users;
     public void transferetMontant(double montant) {
         this.caisse -= montant;

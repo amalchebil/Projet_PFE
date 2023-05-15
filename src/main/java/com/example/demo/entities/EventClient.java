@@ -34,10 +34,13 @@ public class EventClient {
     // @NotBlank(message = "Le champ montant ne doit pas etre vide.")
     private Double montant_event;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client2;
 
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "agence_id")
     private Agence agence1;
 
 

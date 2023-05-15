@@ -49,11 +49,12 @@ public class Demande_Pret {
     private Statu status;
 @OneToOne
 private Pret pret;
-@ManyToOne
+@ManyToOne(fetch = FetchType.EAGER)
+@JoinColumn(name = "id_garant")
 private Garant garant;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="id_client", referencedColumnName="id_client")
     private Client client;
 

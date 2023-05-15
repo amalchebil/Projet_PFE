@@ -44,8 +44,8 @@ public class Pret {
     @Column(name = "status_p")
     @Enumerated(EnumType.STRING)
     private Statu_p statuP;
-    @ManyToOne
-    @JoinColumn(name = "client_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client;
 
     @OneToOne

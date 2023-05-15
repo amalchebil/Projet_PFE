@@ -30,8 +30,8 @@ public class Demande_Subvention {
     private Statu status;
 
 
-    @ManyToOne
-    @JoinColumn(name="id_client", referencedColumnName="id_client")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_client")
     private Client client;
 
 }
