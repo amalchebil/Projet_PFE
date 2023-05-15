@@ -24,18 +24,18 @@ import java.io.IOException;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-private final UserRepository repository;
-private final JwtService jwtService;
-private final AgenceService agenceService;
+    private final UserRepository repository;
+    private final JwtService jwtService;
+    private final AgenceService agenceService;
 
-private  final TokenRepository tokenRepository;
+    private  final TokenRepository tokenRepository;
 
-private final PasswordEncoder passwordEncoder;
-private final AuthenticationManager authenticationManager;
+    private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
     public AuthenticationResponse authenticate(AuthentiquationRequest request) {
         authenticationManager.authenticate(
-             new UsernamePasswordAuthenticationToken( request.getEmail(),
-                     request.getPassword())
+                new UsernamePasswordAuthenticationToken( request.getEmail(),
+                        request.getPassword())
 
         );
         var user = repository.findByEmail(request.getEmail())
@@ -43,9 +43,13 @@ private final AuthenticationManager authenticationManager;
         var jwtToken=jwtService.generateToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user,jwtToken);
+        AuthenticationResponse response = AuthenticationResponse.builder().Token(jwtToken)
+                .role(user.getRole().name())
+                .id_agence(user.getAgence().getId())
+                .email(user.getEmail()).build();
 
-        return AuthenticationResponse.builder().Token(jwtToken).build();
 
+        return response;
 
     }
 
@@ -62,11 +66,11 @@ private final AuthenticationManager authenticationManager;
                 .cin(request.getCin())
                 .agence(agenceService.getAgenceById(request.getId_agence()))
                 .build();
-      var savedUser=  repository.save(user);
+        var savedUser=  repository.save(user);
 
         var jwtToken=jwtService.generateToken(user);
 
-       saveUserToken(savedUser, jwtToken);
+        saveUserToken(savedUser, jwtToken);
         return AuthenticationResponse.builder().Token(jwtToken).build();
 
     }
@@ -93,6 +97,5 @@ private final AuthenticationManager authenticationManager;
                 .build();
         tokenRepository.save(token);
     }
-
 
 }
