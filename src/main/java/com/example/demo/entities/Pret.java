@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -52,6 +53,7 @@ public class Pret {
     @JoinColumn(name = "id_garant")
     private Garant garant;
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "id_demande")
     private Demande_Pret demandePret;
 

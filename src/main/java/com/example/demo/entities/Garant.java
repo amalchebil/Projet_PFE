@@ -26,8 +26,7 @@ public class Garant {
    @OneToMany(mappedBy = "garant",fetch = FetchType.EAGER)
    private List <Demande_Pret> demandes;
 
-  @OneToOne
-  private Pret  pret;
+
 
     public Garant() {
     }

@@ -47,8 +47,7 @@ public class Demande_Pret {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Statu status;
-@OneToOne
-private Pret pret;
+
 @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "id_garant")
 private Garant garant;

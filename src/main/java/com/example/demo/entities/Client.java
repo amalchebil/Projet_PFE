@@ -53,7 +53,7 @@ public class Client {
     private double montant_sub;
     @Column(name = "montant_projet")
     private double montant_projet;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Pret> prets;
 
