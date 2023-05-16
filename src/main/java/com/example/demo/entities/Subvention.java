@@ -23,9 +23,15 @@ public class Subvention {
     @Column(name="date_creation",nullable = false)
     private LocalDateTime date_creation;
 
-
+    @Column(name = "status_s")
+    @Enumerated(EnumType.STRING)
+    private Statu_p statuS;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_client")
     private Client client;
+
+    @OneToOne
+    @JoinColumn(name = "id_demande")
+    private Demande_Subvention demandeSubvention;
 }

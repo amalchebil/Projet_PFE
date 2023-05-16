@@ -71,8 +71,8 @@ private Demande_pretRepository dmd;
             demande.setStatus(Statu.Rejeter);
         }
 
-        if (newStatus.equals("Rembourser")){
-            demande.setStatus(Statu.Rembourser);
+        if (newStatus.equals("Archiver")){
+            demande.setStatus(Statu.Archiver);
         }
 
 

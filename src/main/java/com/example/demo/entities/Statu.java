@@ -4,6 +4,6 @@ public enum Statu {
     En_attente,
     Approuver,
     Rejeter,
-    Rembourser
+    Archiver
 
 }

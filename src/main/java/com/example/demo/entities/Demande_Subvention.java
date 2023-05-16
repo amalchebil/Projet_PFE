@@ -28,7 +28,8 @@ public class Demande_Subvention {
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Statu status;
-
+  @OneToOne
+  private Subvention subvention;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_client")

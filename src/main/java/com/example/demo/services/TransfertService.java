@@ -15,6 +15,14 @@ public class TransfertService {
 
     @Autowired
     private ClientService clientService; // Injection de dépendance du service client
+    @Autowired
+    private SubventionService subventionService;
+    @Autowired
+    private SubventionRepository subventionRepository;
+    @Autowired
+    Demande_pretRepository demandePretRepository;
+    @Autowired
+    Demande_subventionRepository demandeSubventionRepository;
 
     @Autowired
     private ClientRepository clt ;
@@ -31,8 +39,9 @@ public class TransfertService {
    private EventClientRepository eventClientRepository;
 
     @Transactional
-    public void transfertPret(long clientId,double montant){
-
+    public void transfertPret(long clientId,double montant,long pretId){
+         Pret pret= pretService.getPretById(pretId);
+         var demande = pret.getDemandePret();
         Client client = clientService.getClientById(clientId);
         var c = client.getAgc();
         EventCaisse eventCaisse =new EventCaisse();
@@ -52,8 +61,14 @@ public class TransfertService {
             eventClient.setClient2(client);
             eventClient.setAgence1(c);
             eventClient.setType_event(TypeEvent.Versement);
+
+            //status décaissé
+            pret.setStatuP(Statu_p.Decaisser);
+            demande.setStatus(Statu.Archiver);
+           demandePretRepository.save(demande);
       agr.save(c);
       clt.save(client);
+      pretRepository.save(pret);
         eventCaisseRepository.save(eventCaisse);
           eventClientRepository.save(eventClient);
           }
@@ -64,10 +79,12 @@ public class TransfertService {
     }
 
     @Transactional
-    public void transfertSub(long clientId,double montant){
+    public void transfertSub(long clientId,double montant,long id_sub){
+        Subvention sub =subventionService.getSubById(id_sub);
 
         Client client = clientService.getClientById(clientId);
         var c = client.getAgc();
+        var demandeSub= sub.getDemandeSubvention();
        EventCaisse eventCaisse =new EventCaisse();
         EventClient eventClient=new EventClient();
 
@@ -87,6 +104,11 @@ public class TransfertService {
             eventClient.setClient2(client);
             eventClient.setAgence1(c);
             eventClient.setType_event(TypeEvent.Versement);
+
+            sub.setStatuS(Statu_p.Decaisser);
+            demandeSub.setStatus(Statu.Archiver);
+            subventionRepository.save(sub);
+            demandeSubventionRepository.save(demandeSub);
 
             agr.save(c);
             clt.save(client);

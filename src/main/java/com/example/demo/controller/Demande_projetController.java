@@ -72,8 +72,8 @@ public class Demande_projetController {
             demande.setStatus(Statu.Rejeter);
         }
 
-        if (newStatus.equals("Rembourser")){
-            demande.setStatus(Statu.Rembourser);
+        if (newStatus.equals("Archiver")){
+            demande.setStatus(Statu.Archiver);
         }
 
 

@@ -27,20 +27,22 @@ public class TransfertController {
 
 
 
-    @PostMapping("/Pret/montant/{clientId}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
+    @PostMapping("/Pret/montant/{clientId}/{pretId}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
     public ResponseEntity<String> transfererMontant(@RequestParam double montant, // Récupère la valeur "montant" du formulaire
-                                    @PathVariable("clientId") long clientId) { // Récupère l'ID du client sélectionnée dans le formulaire
+                                    @PathVariable("clientId") long clientId,
+                                                    @PathVariable("pretId") long pretId) { // Récupère l'ID du client sélectionnée dans le formulaire
 
-      Ts.transfertPret(clientId,montant);
+      Ts.transfertPret(clientId,montant,pretId);
         System.out.println(montant);
 return ResponseEntity.status(HttpStatus.OK)
         .body("success");
     }
-    @PostMapping("/Subvention/montant/{clientId}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
+    @PostMapping("/Subvention/montant/{clientId}/{subId}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
     public ResponseEntity<String> transfererMontantSub(@RequestParam double montant, // Récupère la valeur "montant" du formulaire
-                                                    @PathVariable("clientId") long clientId) { // Récupère l'ID du client sélectionnée dans le formulaire
+                                                    @PathVariable("clientId") long clientId,
+                                                       @PathVariable("subId") long id_sub) { // Récupère l'ID du client sélectionnée dans le formulaire
 
-        Ts.transfertSub(clientId,montant);
+        Ts.transfertSub(clientId,montant,id_sub);
         System.out.println(montant);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("success");
