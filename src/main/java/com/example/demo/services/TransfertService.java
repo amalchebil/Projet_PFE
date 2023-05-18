@@ -183,6 +183,10 @@ public class TransfertService {
         eventClient.setAgence1(a);
         eventClient.setType_event(TypeEvent.Retrait);
 
+        if(pret.getMontant_p()==0){
+            pret.setStatuP(Statu_p.Rembourser);
+        }
+
         agr.save(a);
         clt.save(c);
         pretRepository.save(pret);
