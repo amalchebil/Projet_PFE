@@ -1,12 +1,15 @@
 package com.example.demo.services;
 
+import com.example.demo.entities.Pret;
 import com.example.demo.entities.Projet;
+import com.example.demo.entities.Statu_p;
 import com.example.demo.repository.ProjetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,6 +23,8 @@ public class ProjetService {
 
     @Transactional
     public Optional<Projet> afficherProjet(Long  id) {
+
+
         return projetRepository.findById(id);
     }
     @Transactional
@@ -28,11 +33,23 @@ public class ProjetService {
     }
     @Transactional
     public void addProjet(Projet projet) {
+
+        projet.setStatuP(Statu_p.En_cour);
         projetRepository.save(projet);
     }
     @Transactional
     public void updateProjet(Projet projet) {
         projetRepository.save(projet);
+    }
+
+    @Transactional
+    public Projet getProjetById(long id) {
+        Optional<Projet> projet = projetRepository.findById(id);
+        if (projet.isPresent()) {
+            return projet.get();
+        } else {
+            throw new NoSuchElementException("Projet introuvable pour l'ID: " + id);
+        }
     }
 
 }

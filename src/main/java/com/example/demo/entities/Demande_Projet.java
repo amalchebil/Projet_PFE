@@ -25,15 +25,7 @@ public class Demande_Projet {
     @Enumerated(EnumType.STRING)
     private Act_Projet actProjet;
 
-    @Column(name="projet_montant")
-    private double montant;
-    @Column(name="nbr_echeance")
-    private int nombreEcheances;
-    @Column(name="montant_echeance")
-    private double montantParEcheance;
-    @Temporal(TemporalType.DATE)
-    @Column(name="date_echeance")
-    private Date datePremiereEcheance;
+
     @Column(name="gouvernorat")
     private String gouvernorat;
     @Column(name="date_creation_demande")
@@ -48,7 +40,6 @@ public class Demande_Projet {
     @OneToOne
     private Projet projet;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_client")
+    @OneToOne
     private Client client;
 }

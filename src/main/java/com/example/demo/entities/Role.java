@@ -13,7 +13,8 @@ import java.util.stream.Collectors;
 public enum Role {
     Admin,
     PersonnelS,
-    Directeur,
+    DirecteurS,
+    DirecteurA,
     PersonnelA
 
 

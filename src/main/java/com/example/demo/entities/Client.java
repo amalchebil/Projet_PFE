@@ -56,7 +56,7 @@ public class Client {
     @JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Pret> prets;
-
+@JsonIgnore
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private List<Subvention> subventions;
 
@@ -79,12 +79,10 @@ public class Client {
     @JoinColumn(name = "agence_id")
     private Agence agc;
 
-   @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
-   private List<Demande_Projet> demandeProjets;
 
-   @ManyToOne(fetch = FetchType.EAGER)
+   @OneToOne
    private Projet projet;
-
+@JsonIgnore
    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
    private List<Demande_Subvention> demandeSubventions;
 

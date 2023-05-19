@@ -23,7 +23,10 @@ public class TransfertService {
     Demande_pretRepository demandePretRepository;
     @Autowired
     Demande_subventionRepository demandeSubventionRepository;
-
+@Autowired
+ProjetService projetService;
+@Autowired
+ProjetRepository projetRepository;
     @Autowired
     private ClientRepository clt ;
     @Autowired
@@ -122,10 +125,10 @@ public class TransfertService {
     }
 
     @Transactional
-    public void transfertProjet(long clientId,double montant){
+    public void transfertProjet(long clientId,double montant,long projetId){
         EventCaisse eventCaisse =new EventCaisse();
         EventClient eventClient=new EventClient();
-
+        Projet projet= projetService.getProjetById(projetId);
         Client client = clientService.getClientById(clientId);
         var c = client.getAgc();
 
@@ -144,10 +147,12 @@ public class TransfertService {
             eventClient.setClient2(client);
             eventClient.setAgence1(c);
             eventClient.setType_event(TypeEvent.Versement);
-
-
+            projet.setMontant(0);
+            client.setProjet(projet);
+projet.setStatuP(Statu_p.Decaisser);
             agr.save(c);
             clt.save(client);
+            projetRepository.save(projet);
            eventCaisseRepository.save(eventCaisse);
           eventClientRepository.save(eventClient);
           }
@@ -192,6 +197,44 @@ public class TransfertService {
         pretRepository.save(pret);
        eventCaisseRepository.save(eventCaisse);
     eventClientRepository.save(eventClient);
+
+    }
+
+    @Transactional
+    public void rembourserProjet(Long projetId,double montant,long clientId){
+        EventCaisse eventCaisse =new EventCaisse();
+        EventClient eventClient=new EventClient();
+        Projet projet=projetService.getProjetById(projetId);
+        Client c = clientService.getClientById(clientId);
+        var a = c.getAgc();
+
+
+        c.setMontant_projet(c.getMontant_projet()-montant);
+        projet.setMontant(projet.getMontant()+montant);
+        a.setCaisse(a.getCaisse()+montant);
+
+        //enregistrement de l'event caisse
+        eventCaisse.setDate_event(LocalDateTime.now());
+        eventCaisse.setMontant_event(montant);
+        eventCaisse.setAgence2(a);
+        eventCaisse.setClient1(c);
+        eventCaisse.setType_event(TypeEvent.Versement);
+//        //enregistrement de l'event client
+        eventClient.setDate_event(LocalDateTime.now());
+        eventClient.setMontant_event(montant);
+        eventClient.setClient2(c);
+        eventClient.setAgence1(a);
+        eventClient.setType_event(TypeEvent.Retrait);
+
+        if(c.getMontant_projet()==0){
+            projet.setStatuP(Statu_p.Rembourser);
+        }
+
+        agr.save(a);
+        clt.save(c);
+        projetRepository.save(projet);
+        eventCaisseRepository.save(eventCaisse);
+        eventClientRepository.save(eventClient);
 
     }
 

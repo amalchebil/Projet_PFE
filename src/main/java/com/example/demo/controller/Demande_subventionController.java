@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @CrossOrigin(origins="http://localhost:3000")
 @RestController
-@RequestMapping("/DEMANDESUBBVENTION")
+@RequestMapping("/DEMANDESUBVENTION")
 public class Demande_subventionController {
     @Autowired
     private Demande_subventionService cltS ;

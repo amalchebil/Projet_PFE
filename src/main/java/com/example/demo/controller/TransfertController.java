@@ -50,11 +50,11 @@ return ResponseEntity.status(HttpStatus.OK)
     }
 
 
-    @PostMapping("/Projet/montant/{clientId}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
+    @PostMapping("/Projet/montant/{clientId}/{projetid}")// Cette méthode est appelée lorsqu'un formulaire avec la méthode POST est soumis à "/transfert/montant"
     public ResponseEntity<String> transfererMontantProjet(@RequestParam double montant, // Récupère la valeur "montant" du formulaire
-                                                    @PathVariable("clientId") long clientId) { // Récupère l'ID du client sélectionnée dans le formulaire
+                                                    @PathVariable("clientId") long clientId,@PathVariable("projetid") long projetid) { // Récupère l'ID du client sélectionnée dans le formulaire
 
-        Ts.transfertProjet(clientId,montant);
+        Ts.transfertProjet(clientId,montant,projetid);
         System.out.println(montant);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("success");
@@ -66,6 +66,17 @@ return ResponseEntity.status(HttpStatus.OK)
                                                  @PathVariable("pretId") long pretId){
 
         Ts.rembourserPret(pretId,montant);
+        System.out.println(montant);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("success");
+
+    }
+    @PostMapping("RembourserProjet/{projetId}/{clientid}")
+    public ResponseEntity<String> rembourserProjet(@RequestParam double montant,
+                                                 @PathVariable("projetId") long projetId,
+                                                   @PathVariable("clientid") long clientid      ){
+
+        Ts.rembourserProjet(projetId,montant,clientid);
         System.out.println(montant);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("success");

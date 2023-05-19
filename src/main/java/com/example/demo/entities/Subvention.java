@@ -19,6 +19,8 @@ public class Subvention {
     private Long id;
     @Column(name = "montant_sub")
     private Double montant_sub;
+    @Column(name = "description")
+    private String description;
 
     @Column(name="date_creation",nullable = false)
     private LocalDateTime date_creation;

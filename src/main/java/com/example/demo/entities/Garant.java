@@ -23,8 +23,11 @@ public class Garant {
 
     @Column(name = "descrip_g")
     private String descrip_g;
-   @OneToMany(mappedBy = "garant",fetch = FetchType.EAGER)
-   private List <Demande_Pret> demandes;
+
+
+    @OneToOne
+    @JoinColumn(name = "id_demande")
+    private Demande_Pret demandePret;
 
 
 

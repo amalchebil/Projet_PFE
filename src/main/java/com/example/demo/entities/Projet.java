@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -43,15 +44,14 @@ public class Projet {
     private String delegation;
     @Column(name="secteur")
     private String secteur;
+    @Column(name = "status_p")
+    @Enumerated(EnumType.STRING)
+    private Statu_p statuP;
 @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "agence_id")
 private Agence agc1;
 
-@OneToOne
-@JoinColumn(name = "id_demande")
-private Demande_Projet demandeProjet;
 
-   @OneToMany(fetch = FetchType.EAGER)
-    private List<Client> clients;
+
 
 }

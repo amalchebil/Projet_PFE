@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,13 +19,17 @@ public class Agence {
     private String gouvernorat;
     @Column(name="caisse")
     private Double caisse;
+    @JsonIgnore
     @OneToMany(mappedBy = "agc",fetch = FetchType.EAGER)
     private List<Client>clients;
-
+@JsonIgnore
 @OneToMany(mappedBy = "agence2",fetch = FetchType.EAGER)
 private List<EventCaisse>  eventCaisses;
-    @OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER)
+    @JsonIgnore
+@OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER)
     private List<EventClient>  eventClients;
+
+@JsonIgnore
     @OneToMany(mappedBy = "agc1",fetch = FetchType.EAGER)
     private List<Projet>projets;
 

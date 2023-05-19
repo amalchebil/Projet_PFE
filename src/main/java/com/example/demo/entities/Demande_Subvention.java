@@ -22,14 +22,15 @@ public class Demande_Subvention {
 
     @Column(name = "montant_net")
     private Double montant_net;
+    @Column(name = "description")
+    private String description;
     @Column(name="date_creation_demande")
     private LocalDateTime dateAttribut;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Statu status;
-  @OneToOne
-  private Subvention subvention;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_client")
