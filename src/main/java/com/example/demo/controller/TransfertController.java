@@ -71,12 +71,12 @@ return ResponseEntity.status(HttpStatus.OK)
                 .body("success");
 
     }
-    @PostMapping("RembourserProjet/{projetId}/{clientid}")
+    @PostMapping("RembourserProjet/{projetId}")
     public ResponseEntity<String> rembourserProjet(@RequestParam double montant,
-                                                 @PathVariable("projetId") long projetId,
-                                                   @PathVariable("clientid") long clientid      ){
+                                                 @PathVariable("projetId") long projetId
+                                                     ){
 
-        Ts.rembourserProjet(projetId,montant,clientid);
+        Ts.rembourserProjet(projetId,montant);
         System.out.println(montant);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("success");

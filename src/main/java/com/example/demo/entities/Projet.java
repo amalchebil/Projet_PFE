@@ -50,8 +50,8 @@ public class Projet {
 @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "agence_id")
 private Agence agc1;
-
-
+@OneToOne
+    private Client client;
 
 
 }

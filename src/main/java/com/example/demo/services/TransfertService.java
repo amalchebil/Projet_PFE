@@ -154,6 +154,7 @@ Demande_projetService demandeProjetService;
             client.setProjet(projet);
 projet.setStatuP(Statu_p.Decaisser);
 demandeProjet.setStatus(Statu.Archiver);
+projet.setClient(client);
             agr.save(c);
             clt.save(client);
             projetRepository.save(projet);
@@ -205,11 +206,11 @@ demandeProjet.setStatus(Statu.Archiver);
     }
 
     @Transactional
-    public void rembourserProjet(Long projetId,double montant,long clientId){
+    public void rembourserProjet(Long projetId,double montant){
         EventCaisse eventCaisse =new EventCaisse();
         EventClient eventClient=new EventClient();
         Projet projet=projetService.getProjetById(projetId);
-        Client c = clientService.getClientById(clientId);
+        Client c = projet.getClient();
         var a = c.getAgc();
 
 
