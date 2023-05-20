@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Agence;
 
+import com.example.demo.entities.Subvention;
 import com.example.demo.repository.AgenceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,25 @@ public class AgenceService {
         } else {
             throw new NoSuchElementException("Agence introuvable pour l'ID: " + id); // Lance une exception si l'Agence n'existe pas
         }
+    }
+
+    public Agence updateAgence(Long id, Agence p) {
+
+
+        Agence existingAgence = agr.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingAgence.setNom_agence(p.getNom_agence());
+        existingAgence.setCaisse(p.getCaisse());
+        existingAgence.setGouvernorat(p.getGouvernorat());
+
+
+
+
+        return agr.save(existingAgence);
     }
 
 }

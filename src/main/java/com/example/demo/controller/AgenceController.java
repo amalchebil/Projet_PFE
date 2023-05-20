@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entities.Agence;
+import com.example.demo.entities.Subvention;
 import com.example.demo.repository.AgenceRepository;
 import com.example.demo.services.AgenceService;
 import jakarta.validation.Valid;
@@ -66,6 +67,19 @@ public class AgenceController {
         Agence updatedAgence = agenceRepository.save(agence);
 
         return ResponseEntity.ok(updatedAgence);
+    }
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Agence> updateAgence(@PathVariable Long id, @RequestBody Agence updatedAgence) {
+
+
+        Agence Agence = cltS.updateAgence(id,updatedAgence);
+
+
+        return ResponseEntity.ok(Agence);
+
+
     }
 
 

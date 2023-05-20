@@ -3,9 +3,11 @@ package com.example.demo.controller;
 
 import com.example.demo.entities.EventCaisse;
 
+import com.example.demo.entities.Subvention;
 import com.example.demo.services.EventCaisseService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,4 +46,19 @@ public class EventCaisseController {
     public Optional<EventCaisse> GetEventById(@PathVariable Long id){
         return cltS.AfficherEvent(id);
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<EventCaisse> updateEventCaisse(@PathVariable Long id, @RequestBody EventCaisse updatedEventCaisse) {
+
+
+        EventCaisse EventCaisse = cltS.updateEventCaisse(id,updatedEventCaisse);
+
+
+        return ResponseEntity.ok(EventCaisse);
+
+
+    }
+
 }

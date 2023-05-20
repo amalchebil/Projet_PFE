@@ -9,6 +9,7 @@ import com.example.demo.services.EmailService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +33,17 @@ public class ClientController {
     FichierRepository fichierRepository;
     @Autowired
     private EmailService emailService;
+
+    @PutMapping("/put/{id}")
+
+    public ResponseEntity<Client> updateClient(@PathVariable Long id, @RequestBody Client updatedClient) {
+
+        Client client = cltS.updateClient(id, updatedClient);
+
+        return ResponseEntity.ok(client);
+
+    }
+
 
     @PostMapping(value = {"/ADDfichier/{id}"}, consumes={MediaType.MULTIPART_FORM_DATA_VALUE})
     public String addFichier ( @RequestPart("fichier") MultipartFile file,@PathVariable Long id) {

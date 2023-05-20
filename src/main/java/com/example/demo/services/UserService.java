@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Agence;
+import com.example.demo.entities.Subvention;
 import com.example.demo.entities.User;
 import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,26 @@ public class UserService {
         } else {
             throw new NoSuchElementException("Agence introuvable pour l'ID: " + id);
         }
+    }
+    @Transactional
+    public User updateUser(Long id, User p) {
+
+
+        User existingUser = userRepository.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingUser.setFirstname(p.getFirstname());
+        existingUser.setLastname(p.getLastname());
+        existingUser.setEmail(p.getEmail());
+        existingUser.setRole(p.getRole());
+        existingUser.setAgence(p.getAgence());
+
+
+
+
+        return userRepository.save(existingUser);
     }
 }

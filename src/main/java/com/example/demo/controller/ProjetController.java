@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entities.Projet;
 import com.example.demo.services.ProjetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,4 +36,20 @@ public class ProjetController {
     public void updateProjet(@RequestBody Projet projet){
         psrv.updateProjet(projet);
     }
+
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Projet> updateProjet(@PathVariable Long id, @RequestBody Projet updatedprojet) {
+
+
+        Projet Projet = psrv.updateproj(id,updatedprojet);
+
+
+        return ResponseEntity.ok(Projet);
+
+
+    }
+
 }

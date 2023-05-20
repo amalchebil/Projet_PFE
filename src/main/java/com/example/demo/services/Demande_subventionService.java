@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Demande_Subvention;
 import com.example.demo.entities.Statu;
+import com.example.demo.entities.Subvention;
 import com.example.demo.repository.Demande_projetRepository;
 import com.example.demo.repository.Demande_subventionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,5 +45,24 @@ public class Demande_subventionService {
     @Transactional
     public Optional<Demande_Subvention> AfficherDemandePret(Long  id){
         return dmd.findById(id);
+    }
+
+
+    public Demande_Subvention updateDemande_Subvention(Long id, Demande_Subvention p) {
+
+
+        Demande_Subvention existingDemande_Subvention = dmd.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingDemande_Subvention.setDescription(p.getDescription());
+        existingDemande_Subvention.setMontant_net(p.getMontant_net());
+
+
+
+
+        return dmd.save(existingDemande_Subvention);
     }
 }

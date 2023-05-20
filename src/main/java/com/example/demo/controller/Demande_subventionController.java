@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entities.Demande_Subvention;
 import com.example.demo.entities.Statu;
+import com.example.demo.entities.Subvention;
 import com.example.demo.repository.Demande_subventionRepository;
 import com.example.demo.services.Demande_subventionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -82,5 +84,20 @@ public class Demande_subventionController {
         // Rediriger l'utilisateur vers la page de détails de la demande modifiée
         return "";
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Demande_Subvention> updateDemande_Subvention(@PathVariable Long id, @RequestBody Demande_Subvention updatedDemande_Subvention) {
+
+
+        Demande_Subvention Demande_Subvention = cltS.updateDemande_Subvention(id,updatedDemande_Subvention);
+
+
+        return ResponseEntity.ok(Demande_Subvention);
+
+
+    }
+
 
 }

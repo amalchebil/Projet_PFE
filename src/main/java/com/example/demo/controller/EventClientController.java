@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entities.EventClient;
+import com.example.demo.entities.Subvention;
 import com.example.demo.services.EventClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -42,4 +44,19 @@ public class EventClientController {
     public Optional<EventClient> GetEventById(@PathVariable Long id){
         return cltS.AfficherEvent(id);
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<EventClient> updateEventClient(@PathVariable Long id, @RequestBody EventClient updatedEventClient) {
+
+
+        EventClient EventClient = cltS.updateEventClient(id,updatedEventClient);
+
+
+        return ResponseEntity.ok(EventClient);
+
+
+    }
+
 }

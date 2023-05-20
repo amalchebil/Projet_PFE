@@ -42,6 +42,38 @@ public class ProjetService {
         projetRepository.save(projet);
     }
 
+
+    @Transactional
+
+
+    public Projet updateproj(Long id,Projet p) {
+
+
+        Projet existingprojet = projetRepository.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingprojet.setSecteur(p.getSecteur());
+        existingprojet.setMontant(p.getMontant());
+        existingprojet.setMontantParEcheance(p.getMontantParEcheance());
+        existingprojet.setMontantParTraite(p.getMontantParTraite());
+        existingprojet.setDateTraitees(p.getDateTraitees());
+        existingprojet.setDatePremiereEcheance(p.getDatePremiereEcheance());
+        existingprojet.setGouvernorat(p.getGouvernorat());
+        existingprojet.setActivite(p.getActivite());
+        existingprojet.setDelegation(p.getDelegation());
+        existingprojet.setNombreEcheances(p.getNombreEcheances());
+        existingprojet.setNombreTraites(p.getNombreTraites());
+
+
+
+
+        return projetRepository.save(existingprojet);
+    }
+
+
     @Transactional
     public Projet getProjetById(long id) {
         Optional<Projet> projet = projetRepository.findById(id);

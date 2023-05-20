@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.entities.Pret;
+import com.example.demo.entities.Subvention;
 import com.example.demo.services.PretService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -42,6 +44,19 @@ public class PretController {
         psrv.updatePret(Pret);
     }
 
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Pret> updatePret(@PathVariable Long id, @RequestBody Pret updatedPret) {
+
+
+        Pret Pret = psrv.updatePret(id,updatedPret);
+
+
+        return ResponseEntity.ok(Pret);
+
+
+    }
 
 
 }

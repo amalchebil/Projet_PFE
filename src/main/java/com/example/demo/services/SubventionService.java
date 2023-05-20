@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Pret;
+import com.example.demo.entities.Projet;
 import com.example.demo.entities.Subvention;
 import com.example.demo.entities.Statu;
 
@@ -56,4 +57,24 @@ public class SubventionService {
             throw new NoSuchElementException("Subvention introuvable pour l'ID: " + id); // Lance une exception si le pret n'existe pas
         }
     }
+    @Transactional
+
+    public Subvention updateSubvention(Long id, Subvention p) {
+
+
+        Subvention existingSubvention = dmd.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingSubvention.setDescription(p.getDescription());
+        existingSubvention.setMontant_sub(p.getMontant_sub());
+
+
+
+
+        return dmd.save(existingSubvention);
+    }
+
 }

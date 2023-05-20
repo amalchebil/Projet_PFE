@@ -3,6 +3,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.Garant;
 
+import com.example.demo.entities.User;
 import com.example.demo.repository.GarantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,26 @@ public class GarantService {
     @Transactional
     public Optional<Garant> AfficherGarant(Long  id) {
         return gar.findById(id);
+    }
+    @Transactional
+    public Garant updateGarant(Long id, Garant p) {
+
+
+        Garant existingGarant = gar.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingGarant.setNom_g(p.getNom_g());
+        existingGarant.setPrenom_g(p.getPrenom_g());
+        existingGarant.setDescrip_g(p.getDescrip_g());
+        existingGarant.setRelation_g(p.getRelation_g());
+        existingGarant.setCin_g(p.getCin_g());
+
+
+
+
+        return gar.save(existingGarant);
     }
 }

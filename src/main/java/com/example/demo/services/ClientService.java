@@ -18,6 +18,29 @@ public class ClientService {
     @Autowired
     private ClientRepository clt ;
 
+    @Transactional
+
+    public Client updateClient(Long id, Client updatedClient) {
+
+        Client existingClient = clt.findById(id)
+
+                .orElseThrow();
+
+        existingClient.setNom_c(updatedClient.getNom_c());
+
+        existingClient.setPrenom_c(updatedClient.getPrenom_c());
+
+        existingClient.setEmail_c(updatedClient.getEmail_c());
+
+        existingClient.setNumtel_c(updatedClient.getNumtel_c());
+
+        existingClient.setDate_naiss(updatedClient.getDate_naiss());
+
+        existingClient.setAdresse_c(updatedClient.getAdresse_c());
+
+        return clt.save(existingClient);
+
+    }
 
     @Transactional
     public Client AjouterClient (Client f){

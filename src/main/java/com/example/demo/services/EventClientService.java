@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.EventClient;
+import com.example.demo.entities.User;
 import com.example.demo.repository.EventClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +38,27 @@ public class EventClientService {
     @Transactional
     public Optional<EventClient> AfficherEvent(Long  id){
         return evt.findById(id);
+    }
+
+    @Transactional
+    public EventClient updateEventClient(Long id, EventClient p) {
+
+
+        EventClient existingEventClient = evt.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingEventClient.setMontant_event(p.getMontant_event());
+        existingEventClient.setType_event(p.getType_event());
+        existingEventClient.setAgence1(p.getAgence1());
+        existingEventClient.setClient2(p.getClient2());
+
+
+
+
+
+        return evt.save(existingEventClient);
     }
 }

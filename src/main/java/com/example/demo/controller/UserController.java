@@ -4,6 +4,7 @@ import com.example.demo.auth.AuthenticationResponse;
 import com.example.demo.auth.AuthenticationService;
 import com.example.demo.auth.RegisterRequest;
 import com.example.demo.entities.Agence;
+import com.example.demo.entities.Subvention;
 import com.example.demo.entities.User;
 import com.example.demo.services.EmailService;
 import com.example.demo.services.UserService;
@@ -65,4 +66,19 @@ public class UserController {
     public User GetUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User updatedUser) {
+
+
+        User User = userService.updateUser(id,updatedUser);
+
+
+        return ResponseEntity.ok(User);
+
+
+    }
+
 }

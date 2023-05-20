@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.entities.Client;
 import com.example.demo.entities.Pret;
 import com.example.demo.entities.Statu_p;
+import com.example.demo.entities.User;
 import com.example.demo.repository.PretRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,5 +52,28 @@ public class PretService {
         } else {
             throw new NoSuchElementException("Pret introuvable pour l'ID: " + id); // Lance une exception si le pret n'existe pas
         }
+    }
+    @Transactional
+    public Pret updatePret(Long id, Pret p) {
+
+
+        Pret existingPret = pretRepository.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingPret.setMontant_p(p.getMontant_p());
+        existingPret.setMontantParEcheance(p.getMontantParEcheance());
+        existingPret.setDatePremiereEcheance(p.getDatePremiereEcheance());
+        existingPret.setNombreEcheances(p.getNombreEcheances());
+        existingPret.setGarant(p.getGarant());
+        existingPret.setType_plan(p.getType_plan());
+        existingPret.setTypepret(p.getTypepret());
+
+
+
+
+        return pretRepository.save(existingPret);
     }
 }

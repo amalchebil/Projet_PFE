@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
+import com.example.demo.entities.Projet;
 import com.example.demo.entities.Subvention;
 import com.example.demo.services.SubventionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +42,20 @@ public class SubventionController {
     public void updateSubvention(@RequestBody Subvention Subvention){
         psrv.ModifierSubvention(Subvention);
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Subvention> updateSubvention(@PathVariable Long id, @RequestBody Subvention updatedSubvention) {
+
+
+        Subvention Subvention = psrv.updateSubvention(id,updatedSubvention);
+
+
+        return ResponseEntity.ok(Subvention);
+
+
+    }
+
 
 }

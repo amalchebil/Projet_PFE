@@ -2,11 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.entities.Demande_Projet;
 import com.example.demo.entities.Statu;
+import com.example.demo.entities.Subvention;
 import com.example.demo.repository.Demande_projetRepository;
 
 import com.example.demo.services.Demande_projetService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -83,5 +85,20 @@ public class Demande_projetController {
         // Rediriger l'utilisateur vers la page de détails de la demande modifiée
         return "";
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Demande_Projet> updateDemande_Projet(@PathVariable Long id, @RequestBody Demande_Projet updatedDemande_Projet) {
+
+
+        Demande_Projet Demande_Projet = cltS.updateDemande_Projet(id,updatedDemande_Projet);
+
+
+        return ResponseEntity.ok(Demande_Projet);
+
+
+    }
+
 
 }

@@ -2,6 +2,7 @@ package com.example.demo.services;
 
 import com.example.demo.entities.EventCaisse;
 
+import com.example.demo.entities.EventClient;
 import com.example.demo.repository.EventCaisseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,26 @@ public class EventCaisseService {
     @Transactional
     public Optional<EventCaisse> AfficherEvent(Long  id){
         return evt.findById(id);
+    }
+    @Transactional
+    public EventCaisse updateEventCaisse(Long id, EventCaisse p) {
+
+
+        EventCaisse existingEventCaisse = evt.findById(id)
+
+
+                .orElseThrow();
+
+
+        existingEventCaisse.setMontant_event(p.getMontant_event());
+        existingEventCaisse.setType_event(p.getType_event());
+        existingEventCaisse.setAgence2(p.getAgence2());
+        existingEventCaisse.setClient1(p.getClient1());
+
+
+
+
+
+        return evt.save(existingEventCaisse);
     }
 }

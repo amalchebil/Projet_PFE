@@ -123,12 +123,15 @@ ProjetRepository projetRepository;
         }
 
     }
-
+@Autowired
+Demande_projetService demandeProjetService;
     @Transactional
-    public void transfertProjet(long clientId,double montant,long projetId){
+    public void transfertProjet(long clientId,double montant,long demandeid){
         EventCaisse eventCaisse =new EventCaisse();
         EventClient eventClient=new EventClient();
-        Projet projet= projetService.getProjetById(projetId);
+
+        Demande_Projet demandeProjet=demandeProjetService.getDemande_ProjetById(demandeid);
+        Projet projet= demandeProjet.getProjet();
         Client client = clientService.getClientById(clientId);
         var c = client.getAgc();
 
@@ -150,6 +153,7 @@ ProjetRepository projetRepository;
             projet.setMontant(0);
             client.setProjet(projet);
 projet.setStatuP(Statu_p.Decaisser);
+demandeProjet.setStatus(Statu.Archiver);
             agr.save(c);
             clt.save(client);
             projetRepository.save(projet);

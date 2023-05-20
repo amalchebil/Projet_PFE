@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.entities.Garant;
+import com.example.demo.entities.Subvention;
 import com.example.demo.services.GarantService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -49,4 +51,19 @@ public class GarantController {
     public Optional<Garant> GetGarantById(@PathVariable Long id){
         return cltS.AfficherGarant(id);
     }
+
+    @PutMapping("/put/{id}")
+
+
+    public ResponseEntity<Garant> updateGarant(@PathVariable Long id, @RequestBody Garant updatedGarant) {
+
+
+        Garant Garant = cltS.updateGarant(id,updatedGarant);
+
+
+        return ResponseEntity.ok(Garant);
+
+
+    }
+
 }
