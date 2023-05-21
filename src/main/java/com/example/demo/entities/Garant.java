@@ -18,7 +18,7 @@ public class Garant {
     private String prenom_g;
     @Column(name = "relation_g")
     private String relation_g;
-    @Column(name = "cin_g")
+    @Column(name = "cin_g",unique = true)
     private String cin_g;
 
     @Column(name = "descrip_g")
