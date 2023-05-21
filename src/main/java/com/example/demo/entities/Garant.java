@@ -95,4 +95,13 @@ public class Garant {
     public void setCin_g(String cin_g) {
         this.cin_g = cin_g;
     }
+
+
+    public Demande_Pret getDemandePret() {
+        return demandePret;
+    }
+
+    public void setDemandePret(Demande_Pret demandePret) {
+        this.demandePret = demandePret;
+    }
 }
