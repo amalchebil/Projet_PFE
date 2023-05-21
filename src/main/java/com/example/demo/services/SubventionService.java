@@ -1,9 +1,6 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.Pret;
-import com.example.demo.entities.Projet;
-import com.example.demo.entities.Subvention;
-import com.example.demo.entities.Statu;
+import com.example.demo.entities.*;
 
 import com.example.demo.repository.SubventionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +20,7 @@ public class SubventionService {
     @Transactional
     public Subvention AjouterSubvention (Subvention f) {
         f.setDate_creation(LocalDateTime.now());
+        f.setStatuS(Statu_p.En_cour);
 
         return dmd.save(f);
     }
