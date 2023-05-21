@@ -151,13 +151,14 @@ ProjetRepository projetRepository;
 @Autowired
 Demande_projetService demandeProjetService;
     @Transactional
-    public void transfertProjet(long clientId,double montant,long demandeid){
+    public void transfertProjet(long demandeid){
         EventCaisse eventCaisse =new EventCaisse();
         EventClient eventClient=new EventClient();
 
         Demande_Projet demandeProjet=demandeProjetService.getDemande_ProjetById(demandeid);
         Projet projet= demandeProjet.getProjet();
-        Client client = clientService.getClientById(clientId);
+        Client client = demandeProjet.getClient();
+      var  montant= projet.getMontant();
         var c = client.getAgc();
 
         if(c.getCaisse()>=montant){
