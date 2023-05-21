@@ -4,8 +4,10 @@ import com.example.demo.entities.Agence;
 import com.example.demo.entities.Subvention;
 import com.example.demo.repository.AgenceRepository;
 import com.example.demo.services.AgenceService;
+import com.example.demo.services.TransfertService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ import java.util.Optional;
 public class AgenceController {
     @Autowired
     private AgenceService cltS ;
+
+    @Autowired
+    public TransfertService transfertService;
 
     @PostMapping("/Ajouteragence")
     public Agence ajouterAgence(@Validated @RequestBody @Valid Agence f){
@@ -67,6 +72,16 @@ public class AgenceController {
         Agence updatedAgence = agenceRepository.save(agence);
 
         return ResponseEntity.ok(updatedAgence);
+    }
+
+
+    @PostMapping("/Alimenter/{centralid}/{agenceid}")
+    public ResponseEntity<String> alimenterCaisse(@PathVariable("centralid")Long centralid,
+                                                  @PathVariable("agenceid")Long agenceid,
+                                                  @RequestBody double montant){
+        transfertService.alimenterCaisse(agenceid,montant,centralid);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body("success");
     }
     @PutMapping("/put/{id}")
 

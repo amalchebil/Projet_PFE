@@ -6,13 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 
 @Service
 public class TransfertService {
     @Autowired
     private AgenceService agenceService; // Injection de dépendance du service Agence
-
+@Autowired
+private EmailService emailService;
     @Autowired
     private ClientService clientService; // Injection de dépendance du service client
     @Autowired
@@ -77,6 +79,17 @@ ProjetRepository projetRepository;
           }
         else {
             System.out.println("montant non disponible dans la caisse");
+            try{  emailService.sendEmail("chebilamal50@gmail.com", "Demande Alimentation caisse",
+                    "Bonjour "+
+
+                    "\nNous avons besoins de liquidité pour l'agence: " +c.getNom_agence()+
+                    "\n pour décaisser un pret de montant :"+montant+
+
+                    "\n \nCordialement");}
+            catch (MessagingException e) {
+
+                e.printStackTrace();
+            }
         }
 
     }
@@ -120,6 +133,18 @@ ProjetRepository projetRepository;
         }
         else {
             System.out.println("montant non disponible dans la caisse");
+
+            try{  emailService.sendEmail("chebilamal50@gmail.com", "Demande Alimentation caisse",
+                    "Bonjour "+
+
+                    "\nNous avons besoins de liquidité pour l'agence: " +c.getNom_agence()+
+                    "\n pour décaisser une subvention de montant :"+montant+
+
+                    "\n \nCordialement");}
+            catch (MessagingException e) {
+
+                e.printStackTrace();
+            }
         }
 
     }
@@ -151,7 +176,7 @@ Demande_projetService demandeProjetService;
             eventClient.setAgence1(c);
             eventClient.setType_event(TypeEvent.Versement);
             projet.setMontant(0);
-            client.setProjet(projet);
+
 projet.setStatuP(Statu_p.Decaisser);
 demandeProjet.setStatus(Statu.Archiver);
 projet.setClient(client);
@@ -163,6 +188,19 @@ projet.setClient(client);
           }
         else {
             System.out.println("montant non disponible dans la caisse");
+
+            try{  emailService.sendEmail("chebilamal50@gmail.com", "Demande Alimentation caisse",
+                    "Bonjour "+
+
+                    "\nNous avons besoins de liquidité pour l'agence: " +c.getNom_agence()+
+                    "\n pour décaisser un projet de montant :"+montant+
+
+                    "\n \nCordialement");}
+            catch (MessagingException e) {
+
+                e.printStackTrace();
+            }
+
         }
 
     }
@@ -243,6 +281,18 @@ projet.setClient(client);
 
     }
 
+
+    @Transactional
+    public void alimenterCaisse(Long agenceid,Double montant,Long centralid){
+
+        Agence agence=agenceService.getAgenceById(agenceid);
+        Agence central=agenceService.getAgenceById(centralid);
+
+        agence.setCaisse(agence.getCaisse()+montant);
+        central.setCaisse(central.getCaisse()-montant);
+
+
+    }
 
 
 

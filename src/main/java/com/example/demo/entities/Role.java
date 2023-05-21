@@ -14,7 +14,7 @@ public enum Role {
     Admin,
     PersonnelS,
     DirecteurS,
-    DirecteurA,
+
     PersonnelA
 
 

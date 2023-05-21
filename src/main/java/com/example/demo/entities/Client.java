@@ -80,8 +80,7 @@ public class Client {
     private Agence agc;
 
 
-   @OneToOne
-   private Projet projet;
+
 @JsonIgnore
    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
    private List<Demande_Subvention> demandeSubventions;
