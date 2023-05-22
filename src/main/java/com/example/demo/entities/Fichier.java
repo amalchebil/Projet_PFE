@@ -22,7 +22,7 @@ public class Fichier {
     @Column(name = "type")
     private String fileType;
 
-
+@Lob
     private byte[] data;
 
 

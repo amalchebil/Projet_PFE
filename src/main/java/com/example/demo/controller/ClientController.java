@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -51,7 +52,7 @@ public class ClientController {
         Client f= cltS.getClientById(id);
         try{
 
-            Fichier fichier= new Fichier(file.getOriginalFilename(), file.getContentType(), file.getBytes(), f);
+            Fichier fichier= new Fichier(StringUtils.cleanPath(file.getOriginalFilename()), file.getContentType(), file.getBytes(), f);
 
             fichierRepository.save(fichier);
             return "fichier ajouter";
