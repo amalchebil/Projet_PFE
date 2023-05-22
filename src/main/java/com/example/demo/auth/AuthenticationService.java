@@ -46,6 +46,8 @@ public class AuthenticationService {
         AuthenticationResponse response = AuthenticationResponse.builder().Token(jwtToken)
                 .role(user.getRole().name())
                 .id_agence(user.getAgence().getId())
+                .lastname(user.getLastname())
+                .firstnam(user.getFirstname())
                 .email(user.getEmail()).build();
 
 
