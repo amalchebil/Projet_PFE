@@ -286,13 +286,31 @@ projet.setClient(client);
     @Transactional
     public void alimenterCaisse(Long agenceid,Double montant,Long centralid){
 
+        EventCaisse eventCaisse1 =new EventCaisse();
+        EventCaisse eventCaisse =new EventCaisse();
         Agence agence=agenceService.getAgenceById(agenceid);
         Agence central=agenceService.getAgenceById(centralid);
-
+        if (central.getCaisse()>=montant){
         agence.setCaisse(agence.getCaisse()+montant);
         central.setCaisse(central.getCaisse()-montant);
+            eventCaisse.setDate_event(LocalDateTime.now());
+            eventCaisse.setMontant_event(montant);
+            eventCaisse.setAgence2(agence);
+            eventCaisse.setType_event(TypeEvent.Versement);
 
 
+            eventCaisse1.setDate_event(LocalDateTime.now());
+            eventCaisse1.setMontant_event(montant);
+            eventCaisse1.setAgence2(central);
+            eventCaisse1.setType_event(TypeEvent.Retrait);
+        }
+       else {
+            System.out.println("montant  non  disponible!!");
+
+        }
+  eventCaisseRepository.save(eventCaisse);
+       agr.save(agence);
+       agr.save(central);
     }
 
 

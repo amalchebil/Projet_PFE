@@ -53,7 +53,7 @@ public class AgenceController {
 //Ajout d'un montant a la caisse
     //Alimentation de caisse
     @PostMapping("/{id}/ajouter-caisse")
-    public ResponseEntity<Agence> ajouterCaisse(@PathVariable Long id, @RequestBody double montant) {
+    public ResponseEntity<Agence> ajouterCaisse(@PathVariable Long id, @RequestParam double montant) {
         Agence agence = agenceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Agence non trouvée"));
 
@@ -64,7 +64,7 @@ public class AgenceController {
     }
 //sortit d'argent de la caisse
     @PostMapping("/{id}/soustraire-caisse")
-    public ResponseEntity<Agence> soustraireCaisse(@PathVariable Long id, @RequestBody double montant) {
+    public ResponseEntity<Agence> soustraireCaisse(@PathVariable Long id, @RequestParam double montant) {
         Agence agence = agenceRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Agence non trouvée"));
 
@@ -78,7 +78,7 @@ public class AgenceController {
     @PostMapping("/Alimenter/{centralid}/{agenceid}")
     public ResponseEntity<String> alimenterCaisse(@PathVariable("centralid")Long centralid,
                                                   @PathVariable("agenceid")Long agenceid,
-                                                  @RequestBody double montant){
+                                                  @RequestParam double montant){
         transfertService.alimenterCaisse(agenceid,montant,centralid);
         return ResponseEntity.status(HttpStatus.OK)
                 .body("success");
