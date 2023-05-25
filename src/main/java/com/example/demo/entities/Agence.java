@@ -20,21 +20,21 @@ public class Agence {
     @Column(name="caisse")
     private Double caisse;
     @JsonIgnore
-    @OneToMany(mappedBy = "agc",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agc",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Client>clients;
 @JsonIgnore
-@OneToMany(mappedBy = "agence2",fetch = FetchType.EAGER)
+@OneToMany(mappedBy = "agence2",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
 private List<EventCaisse>  eventCaisses;
     @JsonIgnore
-@OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER)
+@OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<EventClient>  eventClients;
 
 @JsonIgnore
-    @OneToMany(mappedBy = "agc1",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agc1",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Projet>projets;
 
 
-    @OneToMany(mappedBy = "agence",fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "agence",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<User> users;
     public void transferetMontant(double montant) {
         this.caisse -= montant;

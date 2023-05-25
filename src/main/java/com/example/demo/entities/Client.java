@@ -54,25 +54,25 @@ public class Client {
     @Column(name = "montant_projet")
     private double montant_projet;
     @JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Pret> prets;
 @JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Subvention> subventions;
 
     @JsonIgnore
-    @OneToMany (mappedBy= "client", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy= "client", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Demande_Pret> demandes_pret;
    @JsonIgnore
-  @OneToMany (mappedBy= "client1", fetch = FetchType.EAGER)
+  @OneToMany (mappedBy= "client1", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
    private List<EventCaisse> eventCaisses;
     @JsonIgnore
-    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<EventClient> eventClients;
 
 
     @JsonIgnore
-    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER)
+    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private Set<Fichier> fichiers;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -82,7 +82,7 @@ public class Client {
 
 
 @JsonIgnore
-   @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
+   @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
    private List<Demande_Subvention> demandeSubventions;
 
     public void ajouterMontant(double montant) {

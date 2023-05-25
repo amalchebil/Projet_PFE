@@ -75,26 +75,7 @@ public class ClientController {
 
 
 
-  /*  public Set uploadfichier (MultipartFile[] multipartFiles, Long  id) throws IOException{
-        Set<Fichier> fichiers = new HashSet<>();
-        Client f= cltS.getClientById(id);
-        for (MultipartFile file:multipartFiles){
-            Fichier fichier= new Fichier(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                    file.getBytes(),
-                    f
 
-
-            );
-
-
-            fichiers.add(fichierRepository.save(fichier));
-
-
-        }
-        return fichiers;
-    }*/
 
     @PostMapping("/UPDATEClient")
     public Client UpdateClient (@Validated @RequestBody @Valid Client f) {
@@ -119,13 +100,3 @@ public class ClientController {
 
 
 }
- /* try{  emailService.sendEmail( f.getEmail_c(), "Nouveau client ajouté", "Bonjour " + f.getNom_c() + f.getPrenom_c()+
-               ",\n\nNous avons le plaisir de vous avoir parmit nos clients." +
-               "\nvoici vos information de connexion." +
-               "\n email :"+f.getEmail_c()+
-               "\n mot de passe :"+f.getCin_c()+
-               "\n \nBienvenue.");}
-        catch (MessagingException e) {
-
-            e.printStackTrace();
-        }*/

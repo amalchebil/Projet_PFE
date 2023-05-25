@@ -46,7 +46,7 @@ public class User implements UserDetails {
     @JoinColumn(name = "agence_id")
     private Agence agence;
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
     private List<Token> tokens;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
