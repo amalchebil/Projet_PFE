@@ -54,6 +54,7 @@ public class Pret {
     private Garant garant;
     @OneToOne
     @JsonIgnore
+
     @JoinColumn(name = "id_demande")
     private Demande_Pret demandePret;
 

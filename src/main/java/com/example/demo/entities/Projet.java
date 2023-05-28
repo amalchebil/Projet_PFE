@@ -44,6 +44,7 @@ public class Projet {
     private String delegation;
     @Column(name="secteur")
     private String secteur;
+
     @Column(name = "status_p")
     @Enumerated(EnumType.STRING)
     private Statu_p statuP;
