@@ -7,7 +7,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-@Data
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -40,6 +40,6 @@ public class Demande_Projet {
     @OneToOne
     private Projet projet;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private Client client;
 }

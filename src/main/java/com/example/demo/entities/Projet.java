@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -51,7 +51,7 @@ public class Projet {
 @ManyToOne(fetch = FetchType.EAGER)
 @JoinColumn(name = "agence_id")
 private Agence agc1;
-@OneToOne(cascade = CascadeType.ALL)
+@OneToOne
     private Client client;
 
 

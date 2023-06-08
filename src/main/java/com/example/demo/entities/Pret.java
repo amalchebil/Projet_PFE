@@ -6,7 +6,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-@Data
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -49,10 +49,10 @@ public class Pret {
     @JoinColumn(name = "id_client")
     private Client client;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_garant")
     private Garant garant;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     @JsonIgnore
 
     @JoinColumn(name = "id_demande")

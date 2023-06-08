@@ -296,7 +296,7 @@ projet.setClient(client);
             eventCaisse.setDate_event(LocalDateTime.now());
             eventCaisse.setMontant_event(montant);
             eventCaisse.setAgence2(agence);
-            eventCaisse.setType_event(TypeEvent.Versement);
+            eventCaisse.setType_event(TypeEvent.Alimentation);
 
 
             eventCaisse1.setDate_event(LocalDateTime.now());

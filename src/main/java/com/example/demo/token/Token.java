@@ -2,13 +2,11 @@ package com.example.demo.token;
 
 import com.example.demo.entities.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

@@ -58,7 +58,7 @@ public class ClientService {
 
     @Transactional
     public void SupprimerClient (Long id) {
-        Client f = clt.getById(id);
+        Client f = getClientById(id);
         clt.delete(f);
     }
 
