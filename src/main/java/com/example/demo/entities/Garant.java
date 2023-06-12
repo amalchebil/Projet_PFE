@@ -25,9 +25,6 @@ public class Garant {
     private String descrip_g;
 
 
-    @OneToOne
-    @JoinColumn(name = "id_demande")
-    private Demande_Pret demandePret;
 
 
 
@@ -97,11 +94,5 @@ public class Garant {
     }
 
 
-    public Demande_Pret getDemandePret() {
-        return demandePret;
-    }
 
-    public void setDemandePret(Demande_Pret demandePret) {
-        this.demandePret = demandePret;
-    }
 }

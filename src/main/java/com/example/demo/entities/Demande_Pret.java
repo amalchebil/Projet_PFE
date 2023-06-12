@@ -48,6 +48,9 @@ public class Demande_Pret {
     @Enumerated(EnumType.STRING)
     private Statu status;
 
+@OneToOne
+@JoinColumn(name="id_garant")
+private Garant garant;
 
 
 
