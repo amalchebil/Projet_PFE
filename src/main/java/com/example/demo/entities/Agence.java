@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name="T_Agence")
+@Table(name = "T_Agence")
 public class Agence {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,25 +17,26 @@ public class Agence {
     private String nom_agence;
     @Column(name = "gouvernorat")
     private String gouvernorat;
-    @Column(name="caisse")
+    @Column(name = "caisse")
     private Double caisse;
     @JsonIgnore
-    @OneToMany(mappedBy = "agc",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
-    private List<Client>clients;
-@JsonIgnore
-@OneToMany(mappedBy = "agence2",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
-private List<EventCaisse>  eventCaisses;
+    @OneToMany(mappedBy = "agc", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Client> clients;
     @JsonIgnore
-@OneToMany(mappedBy = "agence1",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
-    private List<EventClient>  eventClients;
+    @OneToMany(mappedBy = "agence2", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<EventCaisse> eventCaisses;
+    @JsonIgnore
+    @OneToMany(mappedBy = "agence1", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<EventClient> eventClients;
 
-@JsonIgnore
-    @OneToMany(mappedBy = "agc1",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
-    private List<Projet>projets;
+    @JsonIgnore
+    @OneToMany(mappedBy = "agc1", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Projet> projets;
 
 
-    @OneToMany(mappedBy = "agence",fetch = FetchType.EAGER,cascade =  CascadeType.ALL )
+    @OneToMany(mappedBy = "agence", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<User> users;
+
     public void transferetMontant(double montant) {
         this.caisse -= montant;
     }

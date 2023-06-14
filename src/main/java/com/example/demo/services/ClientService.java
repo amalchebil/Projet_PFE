@@ -16,15 +16,11 @@ import java.util.Random;
 @Service
 public class ClientService {
     @Autowired
-    private ClientRepository clt ;
-
-    @Transactional
+    private ClientRepository clt;
 
     public Client updateClient(Long id, Client updatedClient) {
 
-        Client existingClient = clt.findById(id)
-
-                .orElseThrow();
+        Client existingClient = clt.findById(id).orElseThrow();
 
         existingClient.setNom_c(updatedClient.getNom_c());
 
@@ -42,37 +38,31 @@ public class ClientService {
 
     }
 
-    @Transactional
-    public Client AjouterClient (Client f){
+    public Client AjouterClient(Client f) {
 
-      f.setMontant_emprunte(0);
-      f.setMontant_projet(0);
-      f.setMontant_sub(0);
+        f.setMontant_emprunte(0);
+        f.setMontant_projet(0);
+        f.setMontant_sub(0);
         return clt.save(f);
     }
 
-    @Transactional
-    public Client ModifierClient (Client f){
+    public Client ModifierClient(Client f) {
         return clt.save(f);
     }
 
-    @Transactional
-    public void SupprimerClient (Long id) {
-        Client f = getClientById(id);
-        clt.delete(f);
+    public void deleteClient(Long id) {
+        Client client = getClientById(id);
+        clt.delete(client);
     }
 
-    @Transactional
-    public List<Client> ListClient(){
+    public List<Client> ListClient() {
         return clt.findAll();
     }
 
-    @Transactional
-    public Optional<Client> AfficherClient(Long  id) {
+    public Optional<Client> AfficherClient(Long id) {
         return clt.findById(id);
     }
 
-    @Transactional
     public Client getClientById(long id) {
         Optional<Client> client = clt.findById(id); // Récupère le client correspondante dans la base de données par son ID
         if (client.isPresent()) {

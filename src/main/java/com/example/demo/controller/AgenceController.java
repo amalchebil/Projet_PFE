@@ -79,9 +79,8 @@ public class AgenceController {
     public ResponseEntity<String> alimenterCaisse(@PathVariable("centralid")Long centralid,
                                                   @PathVariable("agenceid")Long agenceid,
                                                   @RequestParam double montant){
-        transfertService.alimenterCaisse(agenceid,montant,centralid);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body("success");
+
+        return transfertService.alimenterCaisse(agenceid,montant,centralid);
     }
     @PutMapping("/put/{id}")
 

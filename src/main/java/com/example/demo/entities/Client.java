@@ -13,36 +13,34 @@ import java.util.Set;
 
 
 @Entity
-
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Table(name="T_Client")
+@Table(name = "T_Client")
 public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_client")
     private Long id_client;
-    @Column(name = "nom_C",nullable = false)
+    @Column(name = "nom_C", nullable = false)
     private String nom_c;
-    @Column(name = "prenom_C",nullable = false)
+    @Column(name = "prenom_C", nullable = false)
     private String prenom_c;
     @Temporal(TemporalType.DATE)
-    @Column(name="date_naiss",nullable = false)
+    @Column(name = "date_naiss", nullable = false)
     private Date date_naiss;
 
     @Column(name = "sexe_C")
     @Enumerated(EnumType.STRING)
     private Sexe sexe_c;
-    @Column(name = "adresse_C",nullable = false)
+    @Column(name = "adresse_C", nullable = false)
     private String adresse_c;
-    @Column(name = "numtel_C",nullable = false)
+    @Column(name = "numtel_C", nullable = false)
     private int numtel_c;
-    @Column(name = "cin_C",unique = true,nullable = false)
+    @Column(name = "cin_C", unique = true, nullable = false)
     private String cin_c;
-    @Column(name = "email_C",unique = true,nullable = false)
+    @Column(name = "email_C", unique = true, nullable = false)
     @Email(message = "Le champ email doit être une adresse email valide.")
     private String email_c;
 
@@ -54,25 +52,25 @@ public class Client {
     @Column(name = "montant_projet")
     private double montant_projet;
     @JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Pret> prets;
-@JsonIgnore
-    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
+    @JsonIgnore
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Subvention> subventions;
 
     @JsonIgnore
-    @OneToMany (mappedBy= "client", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Demande_Pret> demandes_pret;
-   @JsonIgnore
-  @OneToMany (mappedBy= "client1", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
-   private List<EventCaisse> eventCaisses;
     @JsonIgnore
-    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
+    @OneToMany(mappedBy = "client1", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EventCaisse> eventCaisses;
+    @JsonIgnore
+    @OneToMany(mappedBy = "client2", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<EventClient> eventClients;
 
 
     @JsonIgnore
-    @OneToMany (mappedBy= "client2", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
+    @OneToMany(mappedBy = "client2", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Fichier> fichiers;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -80,16 +78,13 @@ public class Client {
     private Agence agc;
 
 
-
-@JsonIgnore
-   @OneToMany(mappedBy = "client", fetch = FetchType.EAGER,cascade =  CascadeType.REMOVE )
-   private List<Demande_Subvention> demandeSubventions;
+    @JsonIgnore
+    @OneToMany(mappedBy = "client", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Demande_Subvention> demandeSubventions;
 
     public void ajouterMontant(double montant) {
         this.montant_emprunte += montant;
     }
-
-
 
 
 }

@@ -84,7 +84,7 @@ public class ClientController {
 
     @DeleteMapping("/DELETEClient/{id}")
     public void DeleteClient(@PathVariable Long id) {
-        cltS.SupprimerClient(id);
+        cltS.deleteClient(id);
     }
 
     @GetMapping("/GETALLClient")

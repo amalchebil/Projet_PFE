@@ -3,15 +3,12 @@ package com.example.demo.controller;
 import com.example.demo.auth.AuthenticationResponse;
 import com.example.demo.auth.AuthenticationService;
 import com.example.demo.auth.RegisterRequest;
-import com.example.demo.entities.Agence;
-import com.example.demo.entities.Subvention;
 import com.example.demo.entities.User;
 import com.example.demo.services.EmailService;
 import com.example.demo.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

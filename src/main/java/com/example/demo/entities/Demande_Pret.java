@@ -1,9 +1,11 @@
 package com.example.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -13,7 +15,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="T_demandepret")
+@Table(name = "T_demandepret")
 public class Demande_Pret {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,32 +32,30 @@ public class Demande_Pret {
     @Enumerated(EnumType.STRING)
     private Typepret type_pret;
 
-    @Column(name="nbr_echeance")
+    @Column(name = "nbr_echeance")
     private int nombreEcheances;
-    @Column(name="montant_echeance")
+    @Column(name = "montant_echeance")
     private double montantParEcheance;
 
 
-    @JsonFormat(pattern="dd-MM-YYYY")
-    @Column(name="date_decaissement_pref")
+    @JsonFormat(pattern = "dd-MM-YYYY")
+    @Column(name = "date_decaissement_pref")
     private Date date_decaissement_pref;
-    @JsonFormat(pattern="dd-MM-YYYY")
-    @Column(name="date_remb_pref")
+    @JsonFormat(pattern = "dd-MM-YYYY")
+    @Column(name = "date_remb_pref")
     private Date date_remb_pref;
-    @Column(name="date_creation_demande")
+    @Column(name = "date_creation_demande")
     private LocalDateTime dateAttribut;
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Statu status;
 
-@OneToOne
-@JoinColumn(name="id_garant")
-private Garant garant;
-
-
+    @OneToOne
+    @JoinColumn(name = "id_garant")
+    private Garant garant;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="id_client", referencedColumnName="id_client")
+    @JoinColumn(name = "id_client", referencedColumnName = "id_client")
     private Client client;
 
 

@@ -52,9 +52,8 @@ public class Pret {
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "id_garant")
     private Garant garant;
-    @OneToOne(cascade = CascadeType.REMOVE)
+    @OneToOne()
     @JsonIgnore
-
     @JoinColumn(name = "id_demande")
     private Demande_Pret demandePret;
 
